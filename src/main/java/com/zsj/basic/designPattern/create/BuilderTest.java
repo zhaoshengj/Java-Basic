@@ -1,5 +1,12 @@
 package com.zsj.basic.designPattern.create;
 
+/**
+ * 在建造者模式中，有如下4个角色。
+ *  ■ 抽象建造者（Builder）角色：该角色用于规范产品的各个组成部分，并进行抽象，一般独立于应用程序的逻辑。
+ *  ■ 具体建造者（Concrete Builder）角色：该角色实现抽象建造者中定义的所有方法，并且返回一个组建好的产品实例。
+ *  ■ 产品（Product）角色：该角色是建造中的复杂对象，一个系统中会有多于一个的产品类，这些产品类并不一定有共同的接口，完全可以是不相关联的。
+ *  ■ 导演者（Director）角色：该角色负责安排已有模块的顺序，然后告诉 Builder开始建造。
+ */
 public class BuilderTest {
 
     public static void main(String[] args) {

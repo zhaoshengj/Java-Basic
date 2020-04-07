@@ -1,5 +1,11 @@
 package com.zsj.basic.designPattern.create;
 
+/**
+ * 原型模式涉及3个角色。
+ *  ■ 客户（Client）角色：该角色提出创建对象的请求。
+ *  ■ 抽象原型（Prototype）角色：该角色是一个抽象角色，通常由一个Java接口或抽象类实现，给出所有的具体原型类所需的接口。
+ *  ■ 具体原型（Concrete Prototype）角色：该角色是被复制的对象，必须实现抽象原型接口。
+ */
 public class Prototype {
     public static void main(String[] args)
     {
