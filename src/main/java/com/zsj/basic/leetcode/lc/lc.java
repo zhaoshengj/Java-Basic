@@ -3,6 +3,10 @@ package com.zsj.basic.leetcode.lc;
 import com.alibaba.fastjson.JSON;
 import org.junit.Test;
 
+import java.util.Iterator;
+import java.util.LinkedHashMap;
+import java.util.Map;
+
 public class lc {
 
     public static class TreeNode{
@@ -33,6 +37,8 @@ public class lc {
         System.out.println(JSON.toJSONString(A));
     }
 
+
+
     //121. 买卖股票的最佳时机
     public int maxProfit(int[] prices) {
         int sum = 0;
@@ -45,6 +51,43 @@ public class lc {
         }
         return sum;
 
+    }
+
+    // 146. LRU缓存机制
+    class LRUCache {
+
+        LinkedHashMap hashMap;
+        int capacity = 0;
+
+        public LRUCache(int capacity) {
+            capacity = capacity;
+            hashMap = new LinkedHashMap(capacity);
+        }
+
+        public int get(int key) {
+            if (hashMap.keySet().contains(key)) {
+                int value = (int) hashMap.get(key);
+                hashMap.remove(key);
+                // 保证每次查询后，都在末尾
+                hashMap.put(key, value);
+                return value;
+            }
+            return -1;
+        }
+
+        public void put(int key, int value) {
+            if (hashMap.keySet().contains(key)) {
+                hashMap.remove(key);
+            } else if (hashMap.size() == capacity) {
+                Iterator<Map.Entry<Integer, Integer>> iterator = hashMap.entrySet().iterator();
+                iterator.next();
+                iterator.remove();
+            }
+            hashMap.put(key, value);
+
+
+
+        }
     }
 
 
