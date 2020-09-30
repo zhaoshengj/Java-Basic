@@ -5,7 +5,7 @@ import org.junit.Test;
 
 import java.util.*;
 
-public class JZOF {
+public class JZOF_EASY {
 
     public static class ListNode {
 
@@ -179,9 +179,13 @@ public class JZOF {
         int i = 0, j = numbers.length - 1;
         while (i < j) {
             int m = (i + j) / 2;
-            if (numbers[m] > numbers[j]) i = m + 1;
-            else if (numbers[m] < numbers[j]) j = m;
-            else j--;
+            if (numbers[m] > numbers[j]) {
+                i = m + 1;
+            } else if (numbers[m] < numbers[j]) {
+                j = m;
+            } else {
+                j--;
+            }
         }
         return numbers[i];
     }
@@ -398,8 +402,12 @@ public class JZOF {
         return root == null ? true : recur(root.left, root.right);
     }
     boolean recur(TreeNode left,TreeNode right){
-        if(left == null && right == null) return true;
-        if(left == null || right == null || left.val != right.val) return false;
+        if(left == null && right == null) {
+            return true;
+        }
+        if(left == null || right == null || left.val != right.val) {
+            return false;
+        }
         return recur(left.left,right.right) && recur(left.right,right.left);
     }
 
@@ -407,7 +415,9 @@ public class JZOF {
 
     //面试题29. 顺时针打印矩阵
     public int[] spiralOrder(int[][] matrix) {
-        if(matrix.length <= 0) return new int[0];
+        if(matrix.length <= 0) {
+            return new int[0];
+        }
         int left = 0;
         int right = matrix[0].length-1;
         int top = 0;
@@ -419,26 +429,36 @@ public class JZOF {
             for(int i = left;i<=right;i++){ // left to right.
                 sum[s++] = matrix[top][i];
             }
-            if(++top > bottom) break;
+            if(++top > bottom) {
+                break;
+            }
             //右边界
             for(int i = top;i<=bottom;i++){ // top to bottom.
                 sum[s++] = matrix[i][right];
             }
-            if(left > --right) break;
+            if(left > --right) {
+                break;
+            }
             //下边界
             for(int i = right;i>=left;i--){ // right to left.
                 sum[s++] = matrix[bottom][i];
             }
-            if(top > --bottom) break;
+            if(top > --bottom) {
+                break;
+            }
             //左边界
             for(int i = bottom;i>=top;i--){ // bottom to top.
                 sum[s++] = matrix[i][left];
             }
-            if(++left > right) break;
+            if(++left > right) {
+                break;
+            }
         }
         return sum;
 
     }
+
+
 
     //面试题32 - II. 从上到下打印二叉树 II
     public List<List<Integer>> levelOrder(TreeNode root) {
@@ -545,9 +565,15 @@ public class JZOF {
         int p2 =0,p3=0,p5=0;
         for(int i=1;i<n;i++){
             sum[i] = Math.min(sum[p2]*2,Math.min(sum[p3]*3,sum[p5]*5));
-            if(sum[i] == sum[p2]*2) p2++;
-            if(sum[i] == sum[p3]*3) p3++;
-            if(sum[i] == sum[p5]*5) p5++;
+            if(sum[i] == sum[p2]*2) {
+                p2++;
+            }
+            if(sum[i] == sum[p3]*3) {
+                p3++;
+            }
+            if(sum[i] == sum[p5]*5) {
+                p5++;
+            }
         }
         return sum[n-1];
 
@@ -602,6 +628,25 @@ public class JZOF {
         return nums.length;
     }
 
+    //剑指 Offer 54. 二叉搜索树的第k大节点
+    int s,k;
+    public int kthLargest(TreeNode root, int k) {
+        this.k = k;
+        dsf(root);
+        return s;
+
+    }
+    void dsf(TreeNode node){
+        if(node == null){
+            return;
+        }
+        dsf(node.right);
+        if(k == 0){return;}
+        if(--k == 0){s = node.val;}
+        dsf(node.left);
+    }
+
+
     //面试题55 - I. 二叉树的深度
     public int maxDepth(TreeNode root) {
         if(root == null){
@@ -612,7 +657,28 @@ public class JZOF {
         return Math.max(left,right)+1;
 
     }
+    //剑指 Offer 55 - II. 平衡二叉树
+    public boolean isBalanced(TreeNode root) {
+        if(root == null){
+            return true;
+        }
+        return balance(root) != -1;
 
+    }
+    public int balance(TreeNode treeNode){
+        if(treeNode == null){
+            return  0;
+        }
+        int right = balance(treeNode.right);
+        if(right == -1){
+            return right;
+        }
+        int left = balance(treeNode.left);
+        if(left == -1){
+            return  left;
+        }
+        return Math.abs(right-left) < 2?Math.max(right,left)+1:-1;
+    }
     //面试题57. 和为s的两个数字
     //双指针
     public int[] twoSum(int[] nums, int target) {
@@ -719,6 +785,7 @@ public class JZOF {
         return str.toString().trim();
     }
 
+
     //面试题59 - I. 滑动窗口的最大值
     public int[] maxSlidingWindow(int[] nums, int k) {
         if(nums.length < k){
@@ -760,7 +827,9 @@ public class JZOF {
                //骰子出现的可能
                for(int j=1;j<=6;j++){
                    //小于骰子数的，不可能
-                   if(s-j<i-1)break;
+                   if(s-j<i-1) {
+                       break;
+                   }
                    //骰子出现的可能
                    num[i][s] += num[i-1][s-j];
                }
@@ -773,6 +842,38 @@ public class JZOF {
             res[i-n] = (double) num[n][i]/pow;
         }
         return  res;
+    }
+    //剑指 Offer 61. 扑克牌中的顺子
+    public boolean isStraight(int[] nums) {
+        int min = 0;
+        sort(nums);
+        for(int i=0;i< 4;i++){
+            if(nums[i] == 0){
+                min ++;
+            }else if(nums[i] == nums[i+1]) {
+                return false;
+            }
+        }
+        return nums[4]-nums[min] < 5;
+    }
+    void sort(int[] nums){
+        for(int i=0;i<nums.length-1;i++){
+            for(int j=i;j<nums.length;j++){
+                if(nums[i] > nums[j]){
+                    int tmp = nums[i];
+                    nums[i] = nums[j];
+                    nums[j]= tmp;
+                }
+            }
+        }
+    }
+    //剑指 Offer 62. 圆圈中最后剩下的数字
+    public int lastRemaining(int n, int m) {
+        int res = 0;
+        for(int i = 2;i<= n;i++){
+            res = (res+m)%i;
+        }
+        return res;
     }
 
     //面试题65. 不用加减乘除做加法
@@ -817,6 +918,37 @@ public class JZOF {
         }
         return b;
     }
+    //剑指 Offer 68 - I. 二叉搜索树的最近公共祖先
+    public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
+       while (root != null){
+           if(root.val > p.val && root.val > q.val){
+               root = root.left;
+           }else if(root.val < p.val && root.val < q.val){
+              root = root.right;
+           }else {
+               break;
+           }
+       }
+       return root;
+    }
+
+    //剑指 Offer 68 - II. 二叉树的最近公共祖先
+    public TreeNode lowestCommonAncestor1(TreeNode root, TreeNode p, TreeNode q) {
+        if(root == null || root == q || root==p){
+            return  root;
+        }
+        TreeNode left = lowestCommonAncestor(root.left, p, q);
+        TreeNode right = lowestCommonAncestor(root.right, p, q);
+        if(left == null){
+            return right;
+        }
+        if(right == null){
+            return left;
+        }
+        return root;
+    }
+
+
 
     @Test
     public void test(){
@@ -889,6 +1021,7 @@ public class JZOF {
         System.out.println(JSON.toJSONString(ints));
 
 
+        System.out.println(887902074721L%4);
 
     }
 
