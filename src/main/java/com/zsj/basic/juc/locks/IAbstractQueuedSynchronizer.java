@@ -718,8 +718,7 @@ public abstract class IAbstractQueuedSynchronizer
      */
 
     /**
-     * Acquires in exclusive uninterruptible mode for thread already in
-     * queue. Used by condition wait methods as well as acquire.
+     * 以排他的不间断模式获取已经在队列中的线程。用于条件等待方法以及获取。
      *
      * @param node the node
      * @param arg the acquire argument
@@ -775,7 +774,7 @@ public abstract class IAbstractQueuedSynchronizer
     }
 
     /**
-     * Acquires in exclusive timed mode.
+     * 以排他定时模式进行获取。
      *
      * @param arg the acquire argument
      * @param nanosTimeout max wait time
@@ -813,7 +812,7 @@ public abstract class IAbstractQueuedSynchronizer
     }
 
     /**
-     * Acquires in shared uninterruptible mode.
+     * 以共享的不间断模式进行获取。
      * @param arg the acquire argument
      */
     private void doAcquireShared(int arg) {
