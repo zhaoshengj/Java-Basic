@@ -139,7 +139,7 @@ import java.util.concurrent.locks.ReentrantLock;
  *
  * <ol>
  *
- * <li> 在默认的{@link IThreadPoolExecutor.Abort olicy}中，处理程序在拒绝时抛出运行时{@link RejectedExecutionException}。 </li>
+ * <li> 在默认的{@link IThreadPoolExecutor.Abortolicy}中，处理程序在拒绝时抛出运行时{@link RejectedExecutionException}。 </li>
  *
  * <li> 在{@link IThreadPoolExecutor.CallerRunsPolicy}中，调用{@code execute}的线程本身运行任务。
  * 这提供了一种简单的反馈控制机制，该机制将减慢新任务的提交速度。 </li>

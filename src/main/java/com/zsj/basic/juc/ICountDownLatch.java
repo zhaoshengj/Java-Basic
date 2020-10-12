@@ -111,7 +111,6 @@ public class ICountDownLatch {
          *   2、释放信号  {@linkplain IAbstractQueuedSynchronizer#doReleaseShared}
          */
          boolean b = sync.releaseShared(1);
-         System.out.println(" ************* :"+b);
     }
 
     // 返回 state 值 volatile 修饰
@@ -172,18 +171,17 @@ class Demo1 {
  * 例子二  拆分任务
  */
 class Demo2 {
-    static ICountDownLatch doneSignal = new ICountDownLatch(5);
-    static Executor executor = Executors.newSingleThreadExecutor();
+    static ICountDownLatch doneSignal = new ICountDownLatch(1);
 
     public static void main(String[] args) throws InterruptedException {
+        System.out.println("开始工作");
+        System.out.println(System.currentTimeMillis());
 
-        System.out.println("等待同时开始工作");
-        for (int i = 1; i <= 5; i++) {
-            executor.execute(new Work(doneSignal, "工作" + i));
-        }
-        doneSignal.await();
+        new Work(doneSignal, "任务").start();
+        boolean await = doneSignal.await(1000, TimeUnit.MILLISECONDS);
+        System.out.println(await);
+        //doneSignal.await(1000,TimeUnit.MILLISECONDS);
         System.out.println("工作结束");
-
     }
 
     static class Work extends Thread {
@@ -197,8 +195,10 @@ class Demo2 {
 
         @Override
         public void run() {
+            System.out.println(System.currentTimeMillis());
+            System.out.println("   执行：" + workName);
             done.countDown();
-            System.out.println(" 执行：" + workName);
+            System.out.println("   执行：结束！");
         }
     }
 
